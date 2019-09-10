@@ -1,15 +1,27 @@
-- alias: "Motion entrance on"
+- alias: Motion Sensor Lights On
+  trigger:
+    platform: state
+    entity_id: binary_sensor.presence_26
+    to: 'on'
+  condition:
+    condition: time
+    after: '07:30'
+    before: '23:30'
+  action:
+    service: light.turn_on
+    entity_id: light.philips_hue_white_amb_entrance
+    data:
+      transition: 15
+
+- alias: Motion Sensor Lights Off
   trigger:
     - platform: state
-      entity_id: binary_sensor.presence_22
-      to: "on"
-    
-  condition:
-    - condition: state
+      entity_id: binary_sensor.presence_26
+      to: 'off'
+      for:
+        minutes: 15
+  action:
+    - service: light.turn_off
       entity_id: light.philips_hue_white_amb_entrance
-      to: "on"
-      
-  action: 
-    - service: light.turn_on
-      entity_id: 
-        - light.philips_hue_white_amb_entrance
+      data:
+        transition: 160

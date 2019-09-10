@@ -1,0 +1,14 @@
+livingroom:
+  name: "Livingroom lights"
+  entities:
+    - light.philips_hue_color_1
+    - light.philips_hue_color_2
+    - light.philips_hue_color_3
+    - light.philips_hue_white_living_sofa
+        
+livingroom_table:
+  name: "Livingroom lights table"
+  entities:
+    - light.philips_hue_color_1
+    - light.philips_hue_color_2
+    - light.philips_hue_color_3

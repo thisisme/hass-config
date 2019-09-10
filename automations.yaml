@@ -1,0 +1,15 @@
+- id: automation 44
+  alias: Sofa lamp on
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.presence_26
+      to: 'on'
+  condition:
+    - condition: time
+      after: '06:30:00'
+      before: '22:00:00'
+  action:
+    service: light.turn_on
+    entity_id: light.philips_hue_white_living_sofa
+    brightness: 254
+    color_temp: 156
