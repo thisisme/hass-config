@@ -1,0 +1,5 @@
+group:
+  lights: 
+    entities: 
+      - light.aqara_white_kitchen_window
+    name: "Kitchen lights"

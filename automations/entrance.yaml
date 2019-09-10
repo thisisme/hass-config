@@ -1,0 +1,15 @@
+- alias: "Motion entrance on"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.presence_22
+      to: "on"
+    
+  condition:
+    - condition: state
+      entity_id: light.philips_hue_white_amb_entrance
+      to: "on"
+      
+  action: 
+    - service: light.turn_on
+      entity_id: 
+        - light.philips_hue_white_amb_entrance

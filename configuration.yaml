@@ -1,0 +1,53 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 0
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Stockholm
+  # Customization file
+  customize: !include customize.yaml
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Show the introduction message on startup.
+# introduction:
+
+#iOS
+ios:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+  server_host: 127.0.0.1
+  base_url: !secret base_url
+  use_x_forwarded_for: true
+  trusted_proxies: 127.0.0.1
+
+# Discover some devices automatically
+discovery:
+
+# Sensors
+sensor:
+  # Weather prediction
+  - platform: yr
+
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_say
+    
+# Verisure
+verisure:
+  username: !secret verisure_username
+  password: !secret verisure_password
+
+group: !include_dir_merge_named groups
+automation: !include_dir_merge_named automations
+script: !include scripts.yaml
