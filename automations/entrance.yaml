@@ -1,27 +1,29 @@
-- alias: Motion Sensor Lights On
+- alias: Motion Sensor Lights On Entrance
   trigger:
-    platform: state
-    entity_id: binary_sensor.presence_26
-    to: 'on'
-  condition:
-    condition: time
-    after: '07:30'
-    before: '23:30'
+    platform: time_pattern
+    minutes: "/1"
+  condition: 
+    condition: numeric_state
+    below: 80
+    "entity_id": "sensor.lightlevel_24"
   action:
-    service: light.turn_on
-    entity_id: light.philips_hue_white_amb_entrance
-    data:
-      transition: 15
-
-- alias: Motion Sensor Lights Off
+    - service: light.turn_on
+      data:
+        brightness: >
+          {%- set lux = states.sensor.room1_lux.state | int -%}
+          {%- set perc = (1000 - lux) / (1000 / 100) | int -%}
+          {{ ((76.5 * perc) / 100) | int }}
+        "entity_id": "light.philips_hue_white_amb_entrance"
+        
+- alias: Motion Sensor Lights Off Entrance
   trigger:
-    - platform: state
-      entity_id: binary_sensor.presence_26
-      to: 'off'
-      for:
-        minutes: 15
+    platform: time_pattern
+    minutes: "/1"
+  condition: 
+    condition: numeric_state
+    above: 80
+    "entity_id": "sensor.lightlevel_24"
   action:
     - service: light.turn_off
-      entity_id: light.philips_hue_white_amb_entrance
       data:
-        transition: 160
+        "entity_id": "light.philips_hue_white_amb_entrance"
