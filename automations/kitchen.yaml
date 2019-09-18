@@ -11,10 +11,10 @@
     service_template: >
       input_boolean.turn_{% if trigger.platform == 'time' %}off{% else %}on{% endif %}
           
-- alias: Turn on entrance lights when movement
+- alias: Turn on kitchen window lights when movement
   trigger:
     platform: state
-    entity_id: binary_sensor.presence_22
+    entity_id: binary_sensor.presence_26
     to: 'on'
   condition:
   - condition: state
@@ -25,5 +25,5 @@
     state: 'below_horizon'
   action:
   - data:
-      entity_id: light.entrance
+      entity_id: light.aqara_white_kitchen_window
     service_template: homeassistant.turn_{{ trigger.to_state.state | lower }}

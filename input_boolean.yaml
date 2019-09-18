@@ -1,0 +1,6 @@
+bedtime:
+  name: Bedtime
+  initial: off
+  icon: mdi:hotel
+
+permanent_light_phase:

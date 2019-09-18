@@ -1,0 +1,19 @@
+- alias: Bedtime
+  trigger:
+    - platform: state
+      entity_id: input_boolean.bedtime
+      to: 'on'
+      for:
+        hours: 0
+        minutes: 5
+        seconds: 0
+  action:
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.living_room
+          - light.tv_room
+          - light.garage
+          - light.kitchen_float
+          - light.kitchen_showcase
+          - light.entrance
